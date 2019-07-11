@@ -1,0 +1,57 @@
+
+<!-- spurit_sri-added -->
+{% include 'spurit_sri-cart-snippet' %}
+<script>
+if (typeof Spurit === 'undefined') var Spurit = {};
+Spurit.onCheckoutReady = function (checkoutApi) {
+    checkoutApi.setOptions({
+        'event': 'click',
+        'elements': document.querySelectorAll('#checkout-btn-section'),
+        'forceStopEvents': true
+    });
+}
+</script>
+
+
+<!-- /spurit_sri-added -->
+<script data-cfasync="false" type="text/javascript">if (typeof Shopify === "undefined") var Shopify = {}; Shopify.cart = {{ cart | json }};</script> 
+<div id="sca-fg-owl-carousel">
+  <div id="freegift_cart_container" name="sca.fg.cart" class="sca-fg-cart-container" style="display: none;">
+    <div id="freegift_message" class="owl-carousel"></div>
+  </div> 
+  <div id="sca-fg-slider-cart" style="display: none;">
+    <div class="sca-fg-cart-title">
+      <strong>Select your free gift (s)</strong>
+    </div>
+    <div id="sca_freegift_list" class="owl-carousel"></div>
+  </div>
+</div>
+
+<!-- 
+	Script below was added by Omega.
+	Do not remove this.
+	In case you need to make changes, please notify the shop owner
+-->
+<script>
+  // Remove old attributes 
+  // includes when customer using abandone cart
+  $.ajax({
+    type: 'POST',
+    url: '/cart/update.js',
+    dataType: 'json',
+    data: {
+      attributes: {
+        'Delivery Date': '',
+        'Delivery Time': ''
+      }
+    }
+  }).done(cart => {
+  });
+</script>
+<!-- Add script file to load app before some apps change the cart attributes -->
+<script src="https://apps.omegatheme.com/delivery-date/delivery-date.js?shop=food-not-flowers-shop.myshopify.com"></script>
+<!-- End script by Omega -->
+
+<div id="sca_fg_cart">
+{% section 'template-cart' %}
+</div>

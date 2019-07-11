@@ -1,0 +1,213 @@
+<div {% if section.settings.title == 'How It Works' %}id="how-it-works"{% endif %}
+  class="module-wrapper style-{{ section.settings.style }} border"
+  data-section-id="{{ section.id }}"
+  data-section-type="text-columns">
+  <div class="module home-inline">
+
+    {% if section.settings.title != blank %}
+      <div class="module-header home-inline-header">
+          <div class="module-title">
+            <h3><span>{{ section.settings.title | escape }}</span></h3>
+          </div>
+        {% if section.settings.subtitle != blank %}
+          <div class="module-subtitle">
+            {{ section.settings.subtitle | escape }}
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="module-body home-inline-body">
+      <div
+        class="list column-{{ section.settings.columns_per_row }} clearfix">
+
+        {% for block in section.blocks %}
+
+          <div class="list-item {% if block.settings.icon != blank  %}has-icon{% endif %}" {{ block.shopify_attributes }}>
+            {% if block.settings.icon != blank %}
+              <div class="list-image-wrapper">
+                {%
+                  include 'font-icon',
+                  icon: block.settings.icon,
+                  class: 'list-item-icon',
+                  title: block.settings.title
+                %}
+              </div>
+            {% endif %}
+            
+            {% if block.settings.img_icon != blank %}
+            <img class="text-columns-img-icon" src="{{ block.settings.img_icon | img_url: '200x200' }}"/>
+            {% endif %}
+
+            <div class="list-text-wrapper">
+              {% if block.settings.title != blank %}
+                <div class="list-title">
+                  {{ block.settings.title | escape }}
+                </div>
+                <div class="title-underline"></div>
+              {% endif %}
+
+              {% if block.settings.text != blank %}
+                <div class="list-text{% if block.settings.title == blank %} no-margin{% endif %}{% if block.settings.title == 'Order' or block.settings.title == 'ORDER' %} order-list-text{% endif %}">
+                  {{ block.settings.text }}
+                </div>
+              {% endif %}
+
+              {% if block.settings.button_text != blank and block.settings.button_link != blank %}
+                <div class="list-cta">
+                  <a class="button list-button" href="{{ block.settings.button_link }}">
+                    {{ block.settings.button_text | escape }}
+                  </a>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    
+    <div class="message-us-section">
+    {% if section.settings.cta_title != "" %}
+    <h3>{{ section.settings.cta_title | escape }}</h3>
+    <div class="title-underline"></div>
+    {% endif %}
+    
+    {% if section.settings.cta_button_link != "" and section.settings.cta_button_text != "" %}
+    <a class="button outline" href="{{ section.settings.cta_button_link }}">
+      <span>{{ section.settings.cta_button_text | escape }}</span>
+    </a>
+    {% endif %}
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Text columns with icons",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Background style",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "light",
+          "label": "Light"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "columns_per_row",
+      "label": "Columns per row",
+      "options": [
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        }
+      ],
+      "default": "3"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Text columns with icons"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subheading"
+    },
+	{
+      "type": "text",
+      "id": "cta_title",
+      "label": "Below columns - heading"
+    },
+	{
+      "type": "text",
+      "id": "cta_button_text",
+      "label": "Below columns - button text"
+    },
+    {
+      "type": "url",
+      "id": "cta_button_link",
+      "label": "Below columns - button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text_column",
+      "name": "Column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Feature title"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Display up to six features with an option to toggle icons on or off, and add unique calls to action.</p>"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Link"
+        },
+		{
+          "type": "image_picker",
+          "id": "img_icon",
+          "label": "Image icon"
+        },
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon name",
+          "default": "ion-image",
+          "info": "[Click here](http:\/\/ionicons.com\/) to view the list of available icons. Example: bluetooth"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "category": "Text",
+      "name": "Text columns with icons",
+      "blocks": [
+        {
+          "type": "text_column"
+        },
+        {
+          "type": "text_column"
+        },
+        {
+          "type": "text_column"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

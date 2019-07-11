@@ -1,0 +1,55 @@
+<div
+  class="module-wrapper style-{{ section.settings.style }} border message-us-section-wrapper"
+  data-section-id="{{ section.id }}"
+  data-section-type="text-columns">
+  <div class="module home-inline">
+    <div class="message-us-section">
+      {% if section.settings.cta_title != "" %}
+      <h3>{{ section.settings.cta_title | escape }}</h3>
+      <div class="title-underline"></div>
+      {% endif %}
+
+      {% if section.settings.cta_button_link != "" and section.settings.cta_button_text != "" %}
+      <a class="button outline" href="{{ section.settings.cta_button_link }}">
+        <span>{{ section.settings.cta_button_text | escape }}</span>
+      </a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Call to action",
+    "settings": [
+      {
+        "type": "text",
+        "id": "cta_title",
+        "label": "Below columns - heading"
+      },
+      {
+        "type": "text",
+        "id": "cta_button_text",
+        "label": "Below columns - button text"
+      },
+      {
+        "type": "url",
+        "id": "cta_button_link",
+        "label": "Below columns - button link"
+      }
+    ],
+	"presets": [
+      {
+        "category": "Text",
+        "name": "Call to action"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

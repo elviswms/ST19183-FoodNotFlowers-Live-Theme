@@ -1,0 +1,902 @@
+{% assign hasGiftCard = false %}
+{% assign cartitems = '' %}
+{% for item in cart.items %}
+{% if item.product.type == 'Gift Card' or item.product.title contains 'Gift card' or item.product.title contains 'gift card' or item.product.title contains 'Gift Card' %}
+	{% assign hasGiftCard = true %}
+{% endif %}
+{% include 'sca_freegift_price' with item %}
+{% assign cartitems = cartitems |  append: item.variant.id | append: ':' | append: item.quantity %}
+{% unless forloop.last == true %}
+{% assign cartitems = cartitems | append: ',' %}
+{% endunless %}
+{% endfor %}
+
+<div class="module-wrapper">
+  <div class="module cart">
+    <div class="module-header cart-header">
+      <h1 class="module-title">{{ 'cart.general.header' | t }}</h1>
+    </div>
+    <div class="module-body">
+      <div class="module-content">
+        {% if cart.item_count > 0 %}
+          <form action="/cart" method="post" class="cart-form">
+            <div class="cart-items-container">
+              <table class="cart-items clean">
+                <thead class="cart-items-thead">
+                  <tr>
+                    <th class="first">{{ 'general.general.product' | t}}</th>
+                    {% comment %} <th>{{ 'general.general.price' | t }}</th>{% endcomment %} 
+                    <th class="last">{{ 'general.general.quantity' | t }}</th>
+                    {% comment %}<th class="last">{{ 'general.general.total' | t }}</th>{% endcomment %} 
+                  </tr>
+                </thead>
+                
+                
+                {% comment %}
+                	Envision - Loop for showing non-gift products - identical to the loop directly below 
+                {% endcomment %}
+                <tbody>
+                  {% for item in cart.items %}
+                  {% unless item.product.tags contains "Free Gift" %}
+                  {% include 'sca_freegift_price' with item %}
+                    <tr
+                      class="cart-item variant-{{ item.variant.id }} {% include 'for-looper' %}"
+                      data-variant="{{ item.variant.id }}"
+                      data-title="{{ item.product.title }}"
+                      data-product-type="standard"
+                      data-url="  {%if item.variant.metafields.secomapp.freegifts%}{{ item.product.url }}{%else%}{{ item.url }}{%endif%}">
+                      <td class="cart-item-product cart-item-td">
+                        <div class="cart-item-image-container">
+                          <a class="cart-image" href="  {%if item.variant.metafields.secomapp.freegifts%}{{ item.product.url }}{%else%}{{ item.url }}{%endif%}">
+                            <img src="{{ item | img_url: 'small' }}" alt="{{ item.product.title }}">
+                          </a>
+                          <a class="cart-item-remove mobile-only" href="/cart/change?line={{ forloop.index }}&amp;quantity=0">
+                            <span class="icon icon-cross"></span>
+                          </a>
+                        </div>
+                        <div class="cart-item-product-wrap">
+                          <span class="cart-title"><a href="  {%if item.variant.metafields.secomapp.freegifts%}{{ item.product.url }}{%else%}{{ item.url }}{%endif%}">{{ item.product.title }}</a></span>
+                          <span class="cart-vendor vendor">{{ item.vendor | replace: "bullet-point", "&#8226" }}</span>
+                          {% unless item.variant.title == 'Default Title' %}
+                            <span class="cart-variant">{{ item.variant.title | remove: '/ Default Title'| remove: 'Default Title' | remove: '/ Default' | remove: 'Default' | replace: '(Freegifts)', ''  }}</span>
+                          {% endunless %}
+                        </div>
+                      </td>
+                      {% comment %}<td class="cart-item-price cart-item-td">
+                        <div class="cart-item-unit-price">
+                          <span class="mobile-only">{{ 'general.general.price' | t }}:</span>
+                          <span class="money">{{ sca_price | money }}</span>
+                        </div>
+                      </td>{% endcomment %} 
+                      {% unless item.variant.inventory_management == blank or item.variant.inventory_policy == 'continue' %}
+                        {% assign inventory = true %}
+                      {% endunless %}
+                      <td class="cart-item-quantity cart-item-td" {% if inventory == true %}data-max="{{ item.variant.inventory_quantity }}"{% endif %}>
+                        <div class="number-input-wrapper cart-item-quantity-wrapper clearfix">
+                          <div class="number-input-field">
+                            <input {%if item.variant.metafields.secomapp.freegifts or item.product.tags contains "Free Gift"%}readonly{%endif%}   type="number" id="cart-item-{{ item.id }}" name="updates[{{ item.id }}]" class="cart-item-quantity-display" value="{{ item.quantity }}" size="1"  aria-label="{{ "general.general.quantity" | t }}" />
+                            <label class="number-input-label" for="cart-item-{{ item.id }}">{{ 'general.general.quantity' | t }}</label>
+                          </div>
+                          {% unless item.variant.metafields.secomapp.freegifts or item.product.tags contains "Free Gift"%}
+                          <div class="number-input-nav">
+                            <div class="number-input-nav-item icon icon-plus cart-item-increase"></div>
+                            <div class="number-input-nav-item icon icon-minus cart-item-decrease"></div>
+                          </div>
+                          {% endunless %}
+                        </div>
+                      </td>
+                      {% comment %}<td class="cart-item-total cart-item-td">
+                        <div class="cart-item-total-container">
+                          <span class="mobile-only">{{ 'general.general.total' | t }}:</span>
+                          <span class="money">{{ item.quantity | times: sca_price | money }}</span>
+                          <a class="cart-item-remove" href="/cart/change?line={{ forloop.index }}&amp;quantity=0">
+                            <span class="icon icon-cross"></span>
+                          </a>
+                        </div>
+                      </td>{% endcomment %} 
+                    </tr>
+                  {% endunless %}
+                  {% endfor %}
+                </tbody>
+                
+                {% comment %}
+                	Envision - Loop for showing gift products - identical to the first loop above 
+                {% endcomment %}
+                <tbody>
+                  {% for item in cart.items %}
+                  {% if item.product.tags contains "Free Gift" %}
+                  {% include 'sca_freegift_price' with item %}
+                    <tr
+                      class="cart-item variant-{{ item.variant.id }} {% include 'for-looper' %}"
+                      data-variant="{{ item.variant.id }}"
+                      data-title="{{ item.product.title }}"
+                      data-product-type="gift"
+                      data-url="  {%if item.variant.metafields.secomapp.freegifts%}{{ item.product.url }}{%else%}{{ item.url }}{%endif%}">
+                      <td class="cart-item-product cart-item-td">
+                        <div class="cart-item-image-container">
+                          <a class="cart-image" href="  {%if item.variant.metafields.secomapp.freegifts%}{{ item.product.url }}{%else%}{{ item.url }}{%endif%}">
+                            <img src="{{ item | img_url: 'small' }}" alt="{{ item.product.title }}">
+                          </a>
+                          <a class="cart-item-remove mobile-only" href="/cart/change?line={{ forloop.index }}&amp;quantity=0">
+                            <span class="icon icon-cross"></span>
+                          </a>
+                        </div>
+                        <div class="cart-item-product-wrap">
+                          <span class="cart-title"><a href="  {%if item.variant.metafields.secomapp.freegifts%}{{ item.product.url }}{%else%}{{ item.url }}{%endif%}">{{ item.product.title }}</a></span>
+                          <span class="cart-vendor vendor">{{ item.vendor | replace: "bullet-point", "&#8226" }}</span>
+                          {% unless item.variant.title == 'Default Title' %}
+                            <span class="cart-variant">{{ item.variant.title | remove: '/ Default Title'| remove: 'Default Title' | remove: '/ Default' | remove: 'Default' | replace: '(Freegifts)', ''  }}</span>
+                          {% endunless %}
+                        </div>
+                      </td>
+                      {% comment %}<td class="cart-item-price cart-item-td">
+                        <div class="cart-item-unit-price">
+                          <span class="mobile-only">{{ 'general.general.price' | t }}:</span>
+                          <span class="money">{{ sca_price | money }}</span>
+                        </div>
+                      </td>{% endcomment %} 
+                      {% unless item.variant.inventory_management == blank or item.variant.inventory_policy == 'continue' %}
+                        {% assign inventory = true %}
+                      {% endunless %}
+                      <td class="cart-item-quantity cart-item-td" {% if inventory == true %}data-max="{{ item.variant.inventory_quantity }}"{% endif %}>
+                        <div class="number-input-wrapper cart-item-quantity-wrapper clearfix">
+                          <div class="number-input-field">
+                            <input {%if item.variant.metafields.secomapp.freegifts or item.product.tags contains "Free Gift"%}readonly{%endif%}   type="number" id="cart-item-{{ item.id }}" name="updates[{{ item.id }}]" class="cart-item-quantity-display" value="{{ item.quantity }}" size="1"  aria-label="{{ "general.general.quantity" | t }}" />
+                            <label class="number-input-label" for="cart-item-{{ item.id }}">{{ 'general.general.quantity' | t }}</label>
+                          </div>
+                          {% unless item.variant.metafields.secomapp.freegifts or item.product.tags contains "Free Gift"%}
+                          <div class="number-input-nav">
+                            <div class="number-input-nav-item icon icon-plus cart-item-increase"></div>
+                            <div class="number-input-nav-item icon icon-minus cart-item-decrease"></div>
+                          </div>
+                          {% endunless %}
+                        </div>
+                      </td>
+                      {% comment %}<td class="cart-item-total cart-item-td">
+                        <div class="cart-item-total-container">
+                          <span class="mobile-only">{{ 'general.general.total' | t }}:</span>
+                          <span class="money">{{ item.quantity | times: sca_price | money }}</span>
+                          <a class="cart-item-remove" href="/cart/change?line={{ forloop.index }}&amp;quantity=0">
+                            <span class="icon icon-cross"></span>
+                          </a>
+                        </div>
+                      </td>{% endcomment %} 
+                    </tr>
+                  {% endif %}
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            <div class="cart-tools">
+              {% assign giftcards_in_cart = false %}
+              {% assign meals_in_cart = 0 %}
+              {% assign curatedgifts_in_cart = false %}
+              {% for item in cart.items %}
+                {% include 'sca_freegift_price' with item %}
+                {% if item.product.type == 'Meal' %}
+                	{% assign meals_in_cart = meals_in_cart | plus: item.quantity %}
+                {% endif %}
+                {% if item.product.type == 'Curated Gifts' %}
+                	{% assign curatedgifts_in_cart = true %}
+                {% endif %}
+                {% if item.product.type == 'Gift Card' %}
+                	{% assign giftcards_in_cart = true %}
+                {% endif %}
+              {% endfor %}
+              {% capture modulo %}{{ meals_in_cart | modulo: 4 }}{% endcapture %}
+              {% capture quantity_needed %}{{ 4 | minus: modulo }}{% endcapture %}
+             
+              
+              {% if meals_in_cart > 3 or meals_in_cart == 0 %}
+              {% if curatedgifts_in_cart == true and meals_in_cart == 0 and giftcards_in_cart == false %}
+              {% comment %} if meals_in_cart == 0 and giftcards_in_cart == 0 {% endcomment %}
+              <div class="cart-totals">
+                <div class="cart-cta">
+                  <p class="cart-notice"><strong>You must have at least 4 meals in your cart to check out. Choose {{ quantity_needed }} more {% if quantity_needed == '1' %}meal{% else %}meals{% endif %} to complete your order!</strong></p>
+                    <a href="/cart/clear" class="clear-cart my-super-fancy-button-style">Clear All Items From Cart</a>
+                    <input type="submit" name="update" value="{{ 'cart.general.update_button' | t }}" class="button outline cart-button cart-update-button update-btn">
+                    <a href="/collections/all-products" class="button checkout-btn">View Meals</a>
+                </div>
+              </div>
+              {% else %}
+              
+              {% if hasGiftCard and meals_in_cart < 1 %}
+              	<div class="cart-attributes-block">
+                <div class="general-info-shipping-block">
+                  <h2>General Information</h2>
+                  <div class="attribute-row">
+                    <p id="type-of-occasion-radio" class="cart-attribute__field alpha occasion-radio">
+                      <label>Type of Occasion</label><br>
+                          <input checked id="individual-occasion-radio" required class="required" type="radio" name="attributes[Type of Occasion]" value="Individual"{% if cart.attributes["Type of Occasion"] == "Individual" %} checked{% endif %}> <span>Individual</span>
+                          <input id="company-occasion-radio" required class="required" type="radio" name="attributes[Type of Occasion]" value="Company"{% if cart.attributes["Type of Occasion"] == "Company" %} checked{% endif %}> <span>Company</span>
+                    </p>
+                    
+                    <p id="individual-occasion-dropdown" class="cart-attribute__field omega occasion-dropdown">
+                      <label for="individual-occasion">Individual Occasion</label><br class="clear">
+                      <select id="individual-occasion" name="attributes[Occasion]" class="required" required>
+                        <option value="" id="empty-value">Select Occasion</option>
+                        <option value="Anniversary">Anniversary</option>
+                        <option value="Baby Showers">Baby Showers</option>
+                        <option value="Bachelorette Parties">Bachelorette Parties</option>
+                        <option value="Bereavement/Shiva">Bereavement/Shiva</option>
+                        <option value="Birthday">Birthday</option>
+                        <option value="Bridal Showers">Bridal Showers</option>
+                        <option value="Christmas">Christmas</option>
+                        <option value="Deployment">Deployment</option>
+                        <option value="Divorce/Separation">Divorce/Separation</option>
+                        <option value="Father’s Day">Father’s Day</option>
+                        <option value="Illness">Illness</option>
+                        <option value="Mother’s Day">Mother’s Day</option>
+                        <option value="New Baby">New Baby</option>
+                        <option value="New House">New House</option>
+                        <option value="New Job">New Job</option>
+                        <option value="Student Care Package">Student Care Package</option>
+                        <option value="Surgery">Surgery</option>
+                        <option value="Thank You">Thank You</option>
+                        <option value="Thanksgiving">Thanksgiving</option>
+                        <option value="Thinking of You">Thinking of You</option>
+                        <option value="Valentine's Day">Valentine's Day</option>
+                        <option id="individual-other" value="Other">Other</option>       
+                      </select>
+                    </p>
+                    
+                    <p id="company-occasion-dropdown" class="cart-attribute__field omega occasion-dropdown">
+                      <label for="company-occasion">Company Occasion</label><br class="clear">
+                      <select id="company-occasion" name="attributes[Occasion]">
+                        <option value="" id="empty-value">Select Occasion</option>
+                        <option value="Anniversary">Anniversary</option>
+                        <option value="Baby Showers">Baby Showers</option>
+                        <option value="Bereavement/Shiva">Bereavement/Shiva</option>
+                        <option value="Birthday">Birthday</option>
+                        <option value="Christmas">Christmas</option>
+                        <option value="Client and Vendor Appreciation">Client and Vendor Appreciation</option>
+                        <option value="Deployment">Deployment</option>
+                        <option value="Divorce/Separation">Divorce/Separation</option>
+						<option value="Employee Appreciation">Employee Appreciation</option>
+                        <option value="Illness">Illness</option>
+                        <option value="New Baby">New Baby</option>
+                        <option value="New House">New House</option>
+                        <option value="New Job">New Job</option>
+                        <option value="Student Care Package">Student Care Package</option>
+                        <option value="Surgery">Surgery</option>
+                        <option value="Thinking of You">Thinking of You</option>
+                        <option id="company-other" value="Other">Other</option>       
+                      </select>
+                    </p>
+                     
+                    
+                     <div class="clear"></div>
+                  </div>
+                  <div class="attribute-row other-field-row">
+                    <p id="individual-other-field-block" class="cart-attribute__field alpha">
+                      <label for="individual-other-field">Other Occasion</label>
+                      <input id="individual-other-field" type="text" name="attributes[Individual Other Field]" value="{{ cart.attributes["Individual Other Field"] }}">
+                    </p>
+                    <p id="company-other-field-block" class="cart-attribute__field alpha">
+                      <label for="company-other-field">Other Occasion</label>
+                      <input id="company-other-field" type="text" name="attributes[Company Other Field]" value="{{ cart.attributes["Company Other Field"] }}">
+                    </p>
+                    <div class="clear"></div>
+                  </div>
+                  
+                  <!-- Do not use RDD with Gift card -->
+                 <!-- <div class="attribute-row" style="display:none">
+                    <p class="cart-attribute__field alpha ot-delivery-date">
+                        <label for="datepicker"><strong><em>Requested</em></strong> Delivery Date</label>
+                        <input required id="ot-datepicker" class="required" type="text" name="attributes[Delivery Date]" value="{{ cart.attributes["Delivery Date"] }}">
+                    </p>
+                    <div class="clear"></div>
+                    {% if hasGiftCard %}
+                    	<style>.ot-delivery-date-notice-text{display:none}</style>
+                    	<p>Your gift card will be emailed on the above date. <span class="ot-giftcard"></span><script>$( ".ot-giftcard" ).append( $("#ot-datepicker").val() );</script></p>  
+                    {% endif %}  
+                    
+                  </div> -->
+                </div>
+                <div class="recipient-shipping-block">
+                  <h2>Send Gift To</h2>
+                  <div class="attribute-row">
+                    <p class="cart-attribute__field alpha">
+                      <label for="recipient-first-name">Recipient's First Name</label>
+                      <input required class="required" id="recipient-first-name" type="text" data-permalink-field="checkout[shipping_address][first_name]" name="attributes[Recipient's First Name]" value="{{ cart.attributes["Recipient's First Name"] }}">
+                    </p>
+                    <p class="cart-attribute__field omega">
+                      <label for="recipient-last-name">Recipient's Last Name</label>
+                      <input required class="required" id="recipient-last-name" type="text" data-permalink-field="checkout[shipping_address][last_name]" name="attributes[Recipient's Last Name]" value="{{ cart.attributes["Recipient's Last Name"] }}">
+                    </p>
+                     <div class="clear"></div>
+                  </div>
+                  <div class="attribute-row">
+                    <p class="cart-attribute__field alpha">
+                      <label for="recipient-email">Recipient's Email</label>
+                      <input required class="required" id="recipient-email" type="text" name="attributes[Recipient's Email]" value="{{ cart.attributes["Recipient's Email"] }}">
+                    </p>
+
+                    <p class="cart-attribute__field omega">
+                      <label for="recipient-phone">Recipient's Phone</label>
+                      <input required class="required" id="recipient-phone" type="text" data-permalink-field="checkout[shipping_address][phone]" name="attributes[Recipient's Phone]" value="{{ cart.attributes["Recipient's Phone"] }}">
+                    </p>
+                    <div class="clear"></div>
+                  </div>  
+                  
+                </div>
+              </div><!--cart-attributes-block-->
+              {% else %}
+              <div class="cart-attributes-block">
+                <div class="general-info-shipping-block">
+                  <h2>General Information</h2>
+                  <div class="attribute-row">
+                    <p id="type-of-occasion-radio" class="cart-attribute__field alpha occasion-radio">
+                      <label>Type of Occasion</label><br>
+                          <input checked id="individual-occasion-radio" required class="required" type="radio" name="attributes[Type of Occasion]" value="Individual"{% if cart.attributes["Type of Occasion"] == "Individual" %} checked{% endif %}> <span>Individual</span>
+                          <input id="company-occasion-radio" required class="required" type="radio" name="attributes[Type of Occasion]" value="Company"{% if cart.attributes["Type of Occasion"] == "Company" %} checked{% endif %}> <span>Company</span>
+                    </p>
+                    
+                    <p id="individual-occasion-dropdown" class="cart-attribute__field omega occasion-dropdown">
+                      <label for="individual-occasion">Individual Occasion</label><br class="clear">
+                      <select id="individual-occasion" name="attributes[Occasion]" class="required" required>
+                        <option value="" id="empty-value">Select Occasion</option>
+                        <option value="Anniversary">Anniversary</option>
+                        <option value="Baby Showers">Baby Showers</option>
+                        <option value="Bachelorette Parties">Bachelorette Parties</option>
+                        <option value="Bereavement/Shiva">Bereavement/Shiva</option>
+                        <option value="Birthday">Birthday</option>
+                        <option value="Bridal Showers">Bridal Showers</option>
+                        <option value="Christmas">Christmas</option>
+                        <option value="Deployment">Deployment</option>
+                        <option value="Divorce/Separation">Divorce/Separation</option>
+                        <option value="Father’s Day">Father’s Day</option>
+                        <option value="Illness">Illness</option>
+                        <option value="Mother’s Day">Mother’s Day</option>
+                        <option value="New Baby">New Baby</option>
+                        <option value="New House">New House</option>
+                        <option value="New Job">New Job</option>
+                        <option value="Student Care Package">Student Care Package</option>
+                        <option value="Surgery">Surgery</option>
+                        <option value="Thank You">Thank You</option>
+                        <option value="Thanksgiving">Thanksgiving</option>
+                        <option value="Thinking of You">Thinking of You</option>
+                        <option value="Valentine's Day">Valentine's Day</option>
+                        <option id="individual-other" value="Other">Other</option>       
+                      </select>
+                    </p>
+                    
+                    <p id="company-occasion-dropdown" class="cart-attribute__field omega occasion-dropdown">
+                      <label for="company-occasion">Company Occasion</label><br class="clear">
+                      <select id="company-occasion" name="attributes[Occasion]">
+                        <option value="" id="empty-value">Select Occasion</option>
+                        <option value="Anniversary">Anniversary</option>
+                        <option value="Baby Showers">Baby Showers</option>
+                        <option value="Bereavement/Shiva">Bereavement/Shiva</option>
+                        <option value="Birthday">Birthday</option>
+                        <option value="Christmas">Christmas</option>
+                        <option value="Client and Vendor Appreciation">Client and Vendor Appreciation</option>
+                        <option value="Deployment">Deployment</option>
+                        <option value="Divorce/Separation">Divorce/Separation</option>
+						<option value="Employee Appreciation">Employee Appreciation</option>
+                        <option value="Illness">Illness</option>
+                        <option value="New Baby">New Baby</option>
+                        <option value="New House">New House</option>
+                        <option value="New Job">New Job</option>
+                        <option value="Student Care Package">Student Care Package</option>
+                        <option value="Surgery">Surgery</option>
+                        <option value="Thinking of You">Thinking of You</option>
+                        <option id="company-other" value="Other">Other</option>       
+                      </select>
+                    </p>
+                     
+                    
+                     <div class="clear"></div>
+                  </div>
+                  <div class="attribute-row other-field-row">
+                    <p id="individual-other-field-block" class="cart-attribute__field alpha">
+                      <label for="individual-other-field">Other Occasion</label>
+                      <input id="individual-other-field" type="text" name="attributes[Individual Other Field]" value="{{ cart.attributes["Individual Other Field"] }}">
+                    </p>
+                    <p id="company-other-field-block" class="cart-attribute__field alpha">
+                      <label for="company-other-field">Other Occasion</label>
+                      <input id="company-other-field" type="text" name="attributes[Company Other Field]" value="{{ cart.attributes["Company Other Field"] }}">
+                    </p>
+                    <div class="clear"></div>
+                  </div>
+                  
+                  {% if hasGiftCard and meals_in_cart >= 4 %}
+                  	
+                    <div class="attribute-row">
+                      <p class="cart-attribute__field alpha ot-delivery-date">
+                          <label for="datepicker"><strong><em>Requested</em></strong> Delivery Date</label>
+                          <input required id="ot-datepicker" class="required" type="text" name="attributes[Delivery Date]" value="{{ cart.attributes["Delivery Date"] }}">
+                      </p>
+
+                      <div class="clear"></div>
+                    </div>
+                  	
+                  {% else %}
+                    <div class="attribute-row">
+                      <p class="cart-attribute__field alpha ot-delivery-date">
+                          <label for="datepicker"><strong><em>Requested</em></strong> Delivery Date</label>
+                          <input required id="ot-datepicker" class="required" type="text" name="attributes[Delivery Date]" value="{{ cart.attributes["Delivery Date"] }}">
+                      </p>
+
+                      <div class="clear"></div>
+                    </div>
+                  {% endif %}
+                  
+                </div>
+                <div class="recipient-shipping-block">
+                  <h2>Recipient's Information</h2>
+                  <div class="attribute-row">
+                    <p class="cart-attribute__field alpha">
+                      <label for="recipient-first-name">Recipient's First Name</label>
+                      <input required class="required" id="recipient-first-name" type="text" data-permalink-field="checkout[shipping_address][first_name]" name="attributes[Recipient's First Name]" value="{{ cart.attributes["Recipient's First Name"] }}">
+                    </p>
+                    <p class="cart-attribute__field omega">
+                      <label for="recipient-last-name">Recipient's Last Name</label>
+                      <input required class="required" id="recipient-last-name" type="text" data-permalink-field="checkout[shipping_address][last_name]" name="attributes[Recipient's Last Name]" value="{{ cart.attributes["Recipient's Last Name"] }}">
+                    </p>
+                     <div class="clear"></div>
+                  </div>
+                  <div class="attribute-row">
+                    <p class="cart-attribute__field alpha">
+                      <label for="recipient-email">Recipient's Email</label>
+                      <input required class="required" id="recipient-email" type="text" name="attributes[Recipient's Email]" value="{{ cart.attributes["Recipient's Email"] }}">
+                    </p>
+                    <div class="attribute-row">
+                    <p class="cart-attribute__field omega">
+                      <label for="recipient-phone">Recipient's Phone</label>
+                      <input required class="required" id="recipient-phone" type="text" data-permalink-field="checkout[shipping_address][phone]" name="attributes[Recipient's Phone]" value="{{ cart.attributes["Recipient's Phone"] }}">
+                    </p>
+                    <div class="clear"></div>
+                  </div>
+                    <div class="clear"></div>
+                  </div>
+                  
+                  <p class="field">
+                    <label for="recipient-company">Company (optional)</label>
+                    <input id="recipient-company" type="text" name="attributes[Company]" value="{{ cart.attributes["Company"] }}">
+                  </p>
+                  
+                  <p class="field">
+                    <label for="recipient-shipping-address">Shipping Address</label>
+                    <input required class="required" id="recipient-shipping-address" type="text" name="attributes[Recipient's Shipping Address]" value="{{ cart.attributes["Recipient's Shipping Address"] }}">
+                  </p>
+                  
+                  <div class="attribute-row auto-sized">
+                    <p class="cart-attribute__field">
+                      <label for="recipient-city">City</label>
+                      <input required class="required" id="recipient-city" type="text" name="attributes[Recipient's City]" value="{{ cart.attributes["Recipient's City"] }}">
+                    </p>
+                    
+                    <p class="cart-attribute__field">
+                      <label for="recipient-state">State</label>
+                      <br class="clear">
+                      <select required class="required" id="recipient-state" type="text" name="attributes[Recipient's State]" value="{{ cart.attributes["Recipient's State"] }}">
+                            <option value="AL">Alabama</option>
+                            <option value="AK">Alaska</option>
+                            <option value="AZ">Arizona</option>
+                            <option value="AR">Arkansas</option>
+                            <option value="CA">California</option>
+                            <option value="CO">Colorado</option>
+                            <option value="CT">Connecticut</option>
+                            <option value="DE">Delaware</option>
+                            <option value="DC">District Of Columbia</option>
+                            <option value="FL">Florida</option>
+                            <option value="GA">Georgia</option>
+                            <option value="HI">Hawaii</option>
+                            <option value="ID">Idaho</option>
+                            <option value="IL">Illinois</option>
+                            <option value="IN">Indiana</option>
+                            <option value="IA">Iowa</option>
+                            <option value="KS">Kansas</option>
+                            <option value="KY">Kentucky</option>
+                            <option value="LA">Louisiana</option>
+                            <option value="ME">Maine</option>
+                            <option value="MD">Maryland</option>
+                            <option value="MA">Massachusetts</option>
+                            <option value="MI">Michigan</option>
+                            <option value="MN">Minnesota</option>
+                            <option value="MS">Mississippi</option>
+                            <option value="MO">Missouri</option>
+                            <option value="MT">Montana</option>
+                            <option value="NE">Nebraska</option>
+                            <option value="NV">Nevada</option>
+                            <option value="NH">New Hampshire</option>
+                            <option value="NJ">New Jersey</option>
+                            <option value="NM">New Mexico</option>
+                            <option value="NY">New York</option>
+                            <option value="NC">North Carolina</option>
+                            <option value="ND">North Dakota</option>
+                            <option value="OH">Ohio</option>
+                            <option value="OK">Oklahoma</option>
+                            <option value="OR">Oregon</option>
+                            <option value="PA">Pennsylvania</option>
+                            <option value="RI">Rhode Island</option>
+                            <option value="SC">South Carolina</option>
+                            <option value="SD">South Dakota</option>
+                            <option value="TN">Tennessee</option>
+                            <option value="TX">Texas</option>
+                            <option value="UT">Utah</option>
+                            <option value="VT">Vermont</option>
+                            <option value="VA">Virginia</option>
+                            <option value="WA">Washington</option>
+                            <option value="WV">West Virginia</option>
+                            <option value="WI">Wisconsin</option>
+                            <option value="WY">Wyoming</option>
+                        </select>
+                    </p>
+
+                    <p class="cart-attribute__field">
+                      <label for="recipient-zip">ZIP Code</label>
+                      <input required class="required" id="recipient-zip" type="text" name="attributes[Recipient's Zip Code]" pattern="\d*" maxlength="5" value="{{ cart.attributes["Recipient's Zip Code"] }}">
+                    </p>
+                    <div class="clear"></div>
+                  </div> 
+                  
+                </div>
+              </div><!--cart-attributes-block-->
+              {% endif %}
+              
+              <div class="cart-totals">
+                <div class="cart-price-info">
+                  <p class="sub-total">{{ 'general.general.subtotal' | t}}</p>
+                  <p class="cart-price"><span class="money">{{ cart.total_price | money }}</span></p>
+                  <p class="cart-message meta">{{ 'cart.general.tax_and_shipping' | t }}</p>
+                  {% if settings.show-currency-switcher %}
+                    <p class="cart-currency-note meta">{{ 'cart.general.currency_note_html' | t: currency: shop.currency }}</p>
+                  {% endif %}
+                </div>
+                <div class="cart-cta">
+                  <a href="/cart/clear" class="clear-cart my-super-fancy-button-style">Clear All Items From Cart</a>
+                  <a href="/collections/all-products" class="button outline checkout-btn inverse view-meals-btn-normal">View Meals</a>
+                  <input type="submit" name="update" value="{{ 'cart.general.update_button' | t }}" class="button outline cart-button cart-update-button update-btn"> 
+                  <input type="submit" class="button checkout-btn inverse cart-button first-checkout-btn" name="checkout" value="Checkout">
+                  <div id="checkout-btn-section"></div>
+                  
+                  {% if additional_checkout_buttons %}
+                    <div class="cart-additional-checkout-buttons">
+                      {{ content_for_additional_checkout_buttons }}
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+              {% endif %}
+              {% else %}
+              <div class="cart-totals">
+                <div class="cart-cta">
+                  <p class="cart-notice"><strong>You need to have at least 4 meals in your cart to check out. Choose {{ quantity_needed }} more {% if quantity_needed == '1' %}meal{% else %}meals{% endif %} to complete your order!</strong></p>
+                    <a href="/cart/clear" class="clear-cart my-super-fancy-button-style">Clear All Items From Cart</a>
+                    <input type="submit" name="update" value="{{ 'cart.general.update_button' | t }}" class="button outline cart-button cart-update-button update-btn">
+                    <a href="/collections/all-products" class="button checkout-btn">View Meals</a>
+                </div>
+              </div>
+              {% endif %}
+              {% if section.settings.order_notes %}
+                <div class="cart-instructions">
+                  <p><label for="cart-notes">{{ 'cart.general.instructions_title' | t }}</label></p>
+                  <textarea rows="6" name="note" id="cart-notes" placeholder="{{ 'cart.general.instructions_placeholder' | t }}">{{ cart.note }}</textarea>
+                </div>
+              {% endif %}
+            </div>
+          </form>
+
+          {% if section.settings.show_shipping_calculator and cart.requires_shipping %}
+            {% include 'shipping-calculator' %}
+          {% endif %}
+        {% else %}
+          <p class="empty">{{ 'cart.general.empty' | t }} <a href="{{ shop.url }}/collections/our-meals">{{ 'cart.general.continue' | t }}</a></p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Envision - custom cart update function to fix issues with quantity updates when the cart is out of order (issue occurred after moving the gift items to the bottom of the cart)
+  $('.cart-update-button').on('click', function(e) {
+    e.preventDefault();
+    
+    var cartUpdates = {};
+    var standardProducts = $('.cart-form .cart-items-container .cart-item[data-product-type="standard"]');
+    
+    $(standardProducts).each(function(index, element) {
+      cartUpdates[$(this).data('variant')] = parseInt($(this).find('.cart-item-quantity-display').val(), 10);
+    });
+    
+    // assemble the ajax request with the cart updates put together above
+    var params = {
+      type: 'POST',
+      url: '/cart/update.js',
+      data: { updates: cartUpdates },
+      dataType: 'json',
+      success: function(res, responseText) {
+        window.location.href = '/cart';
+      },
+      error: function(err, responseText) {
+        console.log(responseText);
+        //window.location.href = '/cart';
+      },
+    };
+    
+    // submit the ajax request
+    $.ajax(params);
+  });
+</script>
+
+<script>
+  
+ 
+  
+  // Notes - this event handler was refactored into a separate function so that we can call it
+  // manually when the page loads, in order to show the proper occasion dropdown when saved
+  // form input values are loaded.
+  var occasionRadioChangeHandler = function(parent) {
+    var id = parent.find("input:checked").attr("id");
+
+    switch (id){
+      case "individual-occasion-radio":
+        $("#individual-occasion-dropdown").addClass("display-now");
+        $("#individual-occasion-dropdown .select-wrapper select").addClass("required");
+        $("#individual-occasion-dropdown .select-wrapper select").prop('required', true);
+        $("#company-occasion-dropdown").addClass("hide-now");
+        $("#company-occasion-dropdown").removeClass("display-now");
+        $("#company-occasion-dropdown .select-wrapper select").removeClass("required");
+        $("#company-occasion-dropdown .select-wrapper select").removeAttr('required');
+        $("#company-occasion-dropdown .select-wrapper select").val('');
+        $("#company-occasion-dropdown .select-wrapper select").change();
+        break;
+      case "company-occasion-radio":
+        $("#company-occasion-dropdown").addClass("display-now");
+        $("#company-occasion-dropdown .select-wrapper select").addClass("required");
+        $("#company-occasion-dropdown .select-wrapper select").prop('required', true);
+        $("#individual-occasion-dropdown").addClass("hide-now");
+        $("#individual-occasion-dropdown").removeClass("display-now");
+        $("#individual-occasion-dropdown .select-wrapper select").removeClass("required");
+        $("#individual-occasion-dropdown .select-wrapper select").removeAttr('required');
+        $("#individual-occasion-dropdown .select-wrapper select").val('');
+        $("#individual-occasion-dropdown .select-wrapper select").change();
+        break;
+    }
+    
+    individualOccasionDropdownChangeHandler($('#individual-occasion').first());
+    companyOccasionDropdownChangeHandler($('#company-occasion').first());
+  };
+  
+  $("#type-of-occasion-radio").change(function(){
+    occasionRadioChangeHandler($(this));
+  });
+  
+</script>
+
+<script>
+  var individualOccasionDropdownChangeHandler = function(parent) {
+    var id = parent.find("option:selected").attr("id");
+
+    switch (id){
+      case "individual-other":
+        $(".other-field-row").addClass("individual-display-now");
+        $("#individual-other-field-block").addClass("display-now");
+        $("#individual-other-field").addClass("required");
+        $("#individual-other-field").prop('required',true);
+        
+        break;
+      default:
+        $(".other-field-row").removeClass("individual-display-now");
+        $("#individual-other-field-block").removeClass("display-now");
+        $("#individual-other-field").removeClass("required");
+        $("#individual-other-field").prop('required',false);
+    }
+  };
+  
+  $("#individual-occasion").on('change', function(){
+    individualOccasionDropdownChangeHandler($(this));
+  });
+</script>
+
+<script>
+  var companyOccasionDropdownChangeHandler = function(parent) {
+    var id = parent.find("option:selected").attr("id");
+
+    switch (id){
+      case "company-other":
+        $(".other-field-row").addClass("company-display-now");
+        $("#company-other-field-block").addClass("display-now");
+        $("#company-other-field").addClass("required");
+        $("#company-other-field").prop('required',true);
+        break;
+      default:
+        $(".other-field-row").removeClass("company-display-now");
+        $("#company-other-field-block").removeClass("display-now");
+        $("#company-other-field").removeClass("required");
+        $("#company-other-field").prop('required',false);
+    }
+  };
+  
+  $("#company-occasion").change(function(){
+    companyOccasionDropdownChangeHandler($(this));
+  });
+  $("#company-occasion").trigger('change');
+</script>
+
+<script type="application/json" data-cart-strings>
+  {
+    "notAvailableText": {{ 'cart.general.not_available'| t | json }},
+    "stockLevelText": {{ 'cart.general.stock_level' | t: stock_count: '** stock_count **' | json }},
+    "okayText": {{ 'cart.general.okay' | t | json }}
+  }
+</script>
+
+<script>
+  $(function() {
+  $('.clear-cart').on('click',function(e){
+    e.preventDefault();
+    $('.cart-tools input.required:not(#ot-datepicker), .cart-tools .other-field-row input, .cart-tools input:radio, .cart-tools select').savy('destroy');
+    
+    $.ajax({
+      type: "POST",
+      url: '/cart/clear.js',
+      success: function(){
+        alert('I cleared the cart!');
+        location.reload();
+      },
+      dataType: 'json'
+    });
+  })
+});
+</script>
+
+<script>
+  
+/*  
+$(document).ready(function(){
+   $("#ottable").hide();
+    $('.ot-delivery-date').click(function(event){
+        event.stopPropagation();
+         $("#ottable").slideToggle("fast");
+    });
+    $("#ottable").on("click", function (event) {
+        event.stopPropagation();
+    });
+});
+
+$(document).on("click", function () {
+    $("#ottable").hide();
+});
+  */
+   
+</script>
+
+<script>
+  $(function() {
+    
+    
+    // load saved inputs.
+    //$('.cart-tools input.required:not(#ot-datepicker), .cart-tools .other-field-row input, .cart-tools input[type=radio], .cart-tools select').savy('destroy');
+    $('.cart-tools input.required:not(#ot-datepicker), .cart-tools .other-field-row input, .cart-tools input:radio, .cart-tools select').savy('load');
+    $('.cart-tools select').change(); // required to actually update the visual value of select dropdowns
+    $('#ot-datepicker').change();
+    occasionRadioChangeHandler($('#type-of-occasion-radio').first()); // call the occasion change event handler to show the proper occasion dropdown.  
+    
+    window.setTimeout(function() {
+      individualOccasionDropdownChangeHandler($('#individual-occasion').first());
+      companyOccasionDropdownChangeHandler($('#company-occasion').first());
+    }, 500);
+    
+//     $('form.cart-form').on('submit', function(e) {
+//       e.preventDefault();
+//       e.stopImmediatePropagation();
+//     });
+    
+    // checkout button code
+    $('.first-checkout-btn').on('click', function(e){      
+      var form = $('form.cart-form');
+      
+      var isFormValid = true;
+      // loop through all the inputs in the .cart-tools section with a class of "required"
+      $('.cart-tools input.required, .cart-tools select.required').each(function(index) {
+        // if the input field is empty, mark it as invalid and set the overall form to invalid. 
+        if($(this).val() == null || $(this).val() == "") {
+          isFormValid = false;
+          $(this).addClass('invalid');
+        } else {
+          // if this particular input field is valid, remove the invalid class just in case. 
+          $(this).removeClass('invalid');
+        }
+      });
+      
+      if ($('#ot-datepicker').prop('required') && $('#ot-datepicker').val() == "") {
+          $('html, body').animate({
+               scrollTop: ($('#ot-datepicker').offset().top - 20)
+          }, 10);
+          return false;	
+      }
+      
+      // if inputs are invalid, show error messages. 
+      if(!isFormValid) {
+        e.preventDefault();
+        
+        // if our form is invalid, trigger HTML5 validation by faking a form submission. 
+        var tempSubmit = document.createElement('button');
+        form.append(tempSubmit);
+        tempSubmit.click();
+        tempSubmit.remove();
+      }
+    });
+    
+//     // form input saving code
+//     $('.first-checkout-btn').on('click', function(e) {
+//       e.preventDefault();
+      
+//       var isFormValid = true;
+//       // loop through all the inputs in the .cart-tools section with a class of "required"
+//       $('.cart-tools input.required, .cart-tools select.required').each(function(index) {
+//         // if the input field is empty, our form is invalid. 
+//         if($(this).val() == null || $(this).val() == "") {
+//           isFormValid = false;
+//         }
+//       });
+      
+//       // if the form is valid, we can save the inputs to cookies
+//       if(isFormValid) {
+//         $('.cart-tools input.required:not(#ot-datepicker), .cart-tools .other-field-row input, .cart-tools input:radio, .cart-tools select').savy('load');
+//       }
+//     });
+  });
+</script>
+
+{% if section.settings.free_gift_enabled %}
+{% include 'free-gift-products' %}
+{% endif %}
+
+
+
+{% schema %}
+{
+  "name": "Cart page",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "order_notes",
+      "label": "Enable order notes",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Shipping calculator"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_shipping_calculator",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "shipping_calculator_default_country",
+      "label": "Default country",
+      "default": "United States"
+    },
+	{
+      "type": "header",
+      "content": "Free gifts"
+    },
+	{
+      "type": "checkbox",
+      "id": "free_gift_enabled",
+      "label": "Free gift feature enabled",
+      "default": false
+    },
+	{
+      "type": "product",
+      "id": "free_gift_1",
+      "label": "Free gift 1",
+      "info": "Increases in quantity by 1 for every 4 meals ordered"
+    },
+	{
+      "type": "product",
+      "id": "free_gift_2",
+      "label": "Free gift 2",
+      "info": "Max 1 per order"
+    }
+  ]
+}
+{% endschema %}

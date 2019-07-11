@@ -1,0 +1,1139 @@
+{
+  "current": {
+    "theme-primary-color": "#82cbb0",
+    "theme-secondary-color": "#4e7f74",
+    "heading-text-color": "#555555",
+    "body-text-color": "#555555",
+    "border-color": "#e6e6e6",
+    "body-background-color": "#ffffff",
+    "body-font": "'NeueHansKendrick-Light', sans-serif",
+    "body-font-weight": "400",
+    "heading-font": "'NeueHansKendrick-Light', sans-serif",
+    "heading-font-weight": "400",
+    "primary-button-font": "'NeueHansKendrick-Bold', sans-serif",
+    "primary-button-font-weight": "400",
+    "featured-product-main": "",
+    "product_module_1": "none",
+    "product_module_2": "none",
+    "product-sale-goal-use": false,
+    "product-sale-goal-style": "gradient",
+    "product_sale_goal_button": "Pre-order",
+    "product_sale_goal_estimated_delivery_date": "Estimated delivery: April",
+    "product_goal_starting_quantity": "",
+    "product_goal": "",
+    "product_goal_use_quantity": false,
+    "product_sale_goal_date_time": "06\/21\/2017 15:00",
+    "social_facebook_url": "https:\/\/www.facebook.com\/FoodNotFlowers\/",
+    "social_twitter_url": "",
+    "social_google_url": "",
+    "social_pinterest_url": "",
+    "social_instagram_url": "https:\/\/www.instagram.com\/food.not.flowers\/",
+    "social_vimeo_url": "",
+    "social_youtube_url": "",
+    "social_rss_url": "",
+    "show-currency-switcher": false,
+    "currency-switcher-format": "money_format",
+    "currency_switcher_supported_currencies": "INR GBP CAD USD AUD EUR JPY",
+    "currency_switcher_default": "USD",
+    "favicon": "shopify:\/\/shop_images\/Food-Not-Flowers-Favicon.png",
+    "checkout_header_image": "",
+    "checkout_logo_image": "shopify:\/\/shop_images\/fnf-logo-with-tagline-gray.png",
+    "checkout_logo_position": "left",
+    "checkout_logo_size": "large",
+    "checkout_body_background_image": "",
+    "checkout_body_background_color": "#fff",
+    "checkout_input_background_color_mode": "white",
+    "checkout_sidebar_background_image": "",
+    "checkout_sidebar_background_color": "#fafafa",
+    "checkout_heading_font": "Raleway",
+    "checkout_body_font": "Raleway",
+    "checkout_accent_color": "#82cbb0",
+    "checkout_button_color": "#82cbb0",
+    "checkout_error_color": "#ef7979",
+    "theme-primary-color-hover": "#0288b5",
+    "sections": {
+      "home-slideshow": {
+        "type": "home-slideshow",
+        "blocks": {
+          "slide-1": {
+            "type": "slide",
+            "settings": {
+              "alignment": "left",
+              "text_style": "light",
+              "image": "shopify:\/\/shop_images\/fnf-hero-box.jpg",
+              "overlay_style": "none",
+              "overlay_opacity": "1",
+              "title": "The Care Package, Reinvented. line-break line-break Fresh, fully prepared meals line-break and curated gifts line-break sent to people you care about line-break wherever they are, line-break whenever they need them.",
+              "subtitle": "",
+              "cta": "Send a Meal",
+              "url": "shopify:\/\/collections\/all-products",
+              "cta-2": "How It Works",
+              "url-2": "#how-it-works"
+            }
+          }
+        },
+        "block_order": [
+          "slide-1"
+        ],
+        "settings": {
+          "enable": true,
+          "layout": "full-window",
+          "transition": "transition-fade",
+          "autoplay": true
+        }
+      },
+      "home-text-columns-with-icons": {
+        "type": "home-text-columns-with-icons",
+        "blocks": {
+          "text-column-1": {
+            "type": "text_column",
+            "settings": {
+              "title": "ORDER",
+              "text": "<p>1. Pick a healthy meal to send. Each&nbsp;order includes a meal for 4 people (4 servings)&nbsp;with a dessert.&nbsp;Mix and match meals, including vegetarian and gluten free options.<\/p>\n<p>2. Don't know what to pick or when it's best to send? Send a gift card. The recipient will get to pick whatever they want, whenever they want it delivered.<\/p>",
+              "button_text": "",
+              "button_link": "",
+              "img_icon": "shopify:\/\/shop_images\/order.png",
+              "icon": ""
+            }
+          },
+          "text-column-2": {
+            "type": "text_column",
+            "settings": {
+              "title": "PERSONALIZE",
+              "text": "<p>3. Personalize your meal by adding one of our curated gifts. We've picked out unique gifts to match the occasions.<\/p>\n<p>4. Send a personalized note or create a 20 second video with your gift. Capture the moment in a way that a card never can.<\/p>",
+              "button_text": "",
+              "button_link": "",
+              "img_icon": "shopify:\/\/shop_images\/personalize.png",
+              "icon": ""
+            }
+          },
+          "text-column-3": {
+            "type": "text_column",
+            "settings": {
+              "title": "TRACK",
+              "text": "<p>5. Fresh meals are shipped cold via FedEx in our sustainable packaging. The sender and recipient will receive a confirmation once order is placed and a link to track&nbsp;their package when the order ships.<\/p>",
+              "button_text": "",
+              "button_link": "",
+              "img_icon": "shopify:\/\/shop_images\/track.png",
+              "icon": ""
+            }
+          }
+        },
+        "block_order": [
+          "text-column-1",
+          "text-column-2",
+          "text-column-3"
+        ],
+        "settings": {
+          "style": "default",
+          "columns_per_row": "3",
+          "title": "How It Works",
+          "subtitle": "",
+          "cta_title": "",
+          "cta_button_text": "",
+          "cta_button_link": ""
+        }
+      },
+      "general-social-feeds": {
+        "type": "general-social-feeds",
+        "settings": {}
+      },
+      "general-footer": {
+        "type": "general-footer",
+        "blocks": {
+          "1524612630381": {
+            "type": "menu",
+            "settings": {
+              "menu": "shop-links"
+            }
+          },
+          "1524612965925": {
+            "type": "menu",
+            "settings": {
+              "menu": "quick-links"
+            }
+          },
+          "1525746458744": {
+            "type": "newsletter",
+            "settings": {
+              "title": "Stay Connected"
+            }
+          }
+        },
+        "block_order": [
+          "1524612630381",
+          "1524612965925",
+          "1525746458744"
+        ],
+        "settings": {
+          "style": "default",
+          "enable_borders": true,
+          "payment_icons": false,
+          "show_logo": true,
+          "footer_logo": "shopify:\/\/shop_images\/food-not-flowers-logo.png",
+          "footer_logo_alternate": ""
+        }
+      },
+      "general-header": {
+        "type": "general-header",
+        "settings": {
+          "top_bar_bg_color": "#82cbb0",
+          "top_bar_text_color": "#ffffff",
+          "top_bar_link": "shopify:\/\/collections\/our-meals",
+          "top_bar_text": "Meal for 4 + dessert + free shipping* = $99",
+          "menu": "main-menu",
+          "header_sticky": false,
+          "show_cart": true,
+          "drawer_social_icons": false,
+          "header_logo": "shopify:\/\/shop_images\/fnf-logo-master-clean-2C-charcoal.png",
+          "header_logo_alternate": "shopify:\/\/shop_images\/fnf-logo-with-tagline-white.png"
+        }
+      },
+      "general-newsletter": {
+        "type": "general-newsletter",
+        "settings": {
+          "enable": false,
+          "style": "default"
+        }
+      },
+      "1525716368661": {
+        "type": "home-featured-collection",
+        "settings": {
+          "style": "default",
+          "products_per_row": "4",
+          "product_rows": "2",
+          "title": "Our Meals",
+          "subtitle": "",
+          "button_text": "",
+          "collection": "frontpage"
+        }
+      },
+      "module-contact-form": {
+        "type": "module-contact-form",
+        "settings": {
+          "style": "default"
+        }
+      },
+      "module-map": {
+        "type": "module-map",
+        "settings": {
+          "enable": false,
+          "location_name": "Pixel Union",
+          "location_address": "1005 Langley St, Victoria, BC V8W, Canada",
+          "api_key": ""
+        }
+      },
+      "template-collection": {
+        "type": "template-collection",
+        "settings": {
+          "products_per_page": "12",
+          "mobile_text_placement": "overlay",
+          "stock_overlay_show": false,
+          "stock_overlay_threshold": "5"
+        }
+      },
+      "template-product": {
+        "type": "template-product",
+        "settings": {
+          "enable_zoom": true,
+          "disable_ajax_add_product": false,
+          "enable-share-buttons": true,
+          "additional_info_text_1": "",
+          "additional_info_url_1": "",
+          "additional_info_icon_1": "info",
+          "additional_info_text_2": "",
+          "additional_info_url_2": "",
+          "additional_info_icon_2": "info"
+        }
+      },
+      "module-related-products": {
+        "type": "module-related-products",
+        "settings": {
+          "enable": false,
+          "style": "light",
+          "stock_overlay_show": false,
+          "stock_overlay_threshold": "5"
+        }
+      },
+      "1526509203934": {
+        "type": "home-cta-section",
+        "settings": {
+          "cta_title": "Have Questions?",
+          "cta_button_text": "Message Us",
+          "cta_button_link": "shopify:\/\/pages\/contact-us"
+        }
+      },
+      "module-faq": {
+        "type": "module-faq",
+        "blocks": {
+          "module-faq-0": {
+            "type": "faq",
+            "settings": {
+              "title": "How are the meals shipped?",
+              "text": "<p>We ship fresh, fully prepared meals cold using frozen gel packs in insulated boxes.&nbsp; Just heat when you&rsquo;re ready to eat.<\/p>"
+            }
+          },
+          "1541012665662": {
+            "type": "faq_html",
+            "settings": {
+              "title": "How much is shipping?",
+              "text": "Currently we have FREE shipping to most areas in the following states: VA, NC, SC, GA, FL, AL, WV, KY, OH, IN, TN, MS, AR, LA, MD, DC.  \n\nAdditional shipping charges will apply if the delivery zip code is outside our “free” zone OR if you request expedited delivery (which we can accommodate).  \n\nYou will be able to confirm all costs before you check out in the shipping section; as we continue to grow, we will increase our free shipping coverage."
+            }
+          },
+          "1529342169974": {
+            "type": "faq",
+            "settings": {
+              "title": "How can I avoid shipping costs?",
+              "text": "<p>Send a gift card that can be emailed the same day. Let the recipient choose whatever they want, whenever they want it.&nbsp;<\/p>"
+            }
+          },
+          "1529342099691": {
+            "type": "faq",
+            "settings": {
+              "title": "I've just placed an order, did you receive it?",
+              "text": "<p>Once an order is placed, you will receive a confirmation email within an hour confirming we have received your order and are preparing for shipment.<\/p>"
+            }
+          },
+          "1529342178581": {
+            "type": "faq",
+            "settings": {
+              "title": "Can I pick the date the recipient will receive the product?",
+              "text": "<p>You can request a date for delivery.&nbsp; These are not guaranteed as our meals are prepared fresh which can affect shipping times.&nbsp; We will always do our best to get your gift delivered as requested.&nbsp; Expedited shipping is also available.<\/p>"
+            }
+          },
+          "1529342197770": {
+            "type": "faq",
+            "settings": {
+              "title": "Can I change the shipping address after my order has been confirmed?",
+              "text": "<p>There is a very small window to update the shipping address once an order has been confirmed.&nbsp; Please contact us at 833.SENDFNF as soon as possible to see what options may be available.&nbsp; We understand things happen and will always try our best to update your order with a new shipping address, but it cannot be guaranteed and we will let you know.<\/p>"
+            }
+          },
+          "1529342403478": {
+            "type": "faq",
+            "settings": {
+              "title": "What if the recipient is not home to accept the delivery?",
+              "text": "<p>No problem!&nbsp; We'll drop the box at the door.&nbsp; No signatures necessary.&nbsp; The recipient will receive an email notification when the gift is delivered with a reminder to refrigerate upon receiving.<\/p>"
+            }
+          },
+          "1529342433926": {
+            "type": "faq",
+            "settings": {
+              "title": "What if I need to ship to a military\/APO address?",
+              "text": "<p>We ship to military bases &hellip; but unfortunately, we cannot ship to APO or any PO boxes.<\/p>"
+            }
+          },
+          "module-faq-1": {
+            "type": "faq",
+            "settings": {
+              "title": "What needs to be done to prepare the meals?",
+              "text": "<p>We make it easy. &nbsp;Just remove the paper sleeve, microwave for approximately 2 minutes or until contents are hot.&nbsp; If you wish to heat in the oven, first transfer the contents to an oven-safe container and then heat at 350 for 12-14 minutes or until hot.<\/p>"
+            }
+          },
+          "module-faq-2": {
+            "type": "faq",
+            "settings": {
+              "title": "Do you use recyclable\/reusable materials?",
+              "text": "<p>Yes!&nbsp; We put careful thought to reduce our footprint.&nbsp; Our stationery is made on recycled paper.&nbsp; Our insulated liners are made of recycled PET bottles.&nbsp; Just place the entire liner in your recycle bin.&nbsp; Our gel packs can be reused or simply tear open and pour the non toxic, water soluble gel down the drain.&nbsp; The remaining gel pack liner can be recycled.&nbsp; Please recycle our shipping box and meal sleeves too.<\/p>"
+            }
+          },
+          "1529342052014": {
+            "type": "faq",
+            "settings": {
+              "title": "Is your packaging BPA-free?",
+              "text": "<p>Our meals are served in BPA-free, microwave ONLY, recyclable plastic trays.<\/p>"
+            }
+          },
+          "1529342073064": {
+            "type": "faq",
+            "settings": {
+              "title": "Are you a subscription service?",
+              "text": "<p>No, but we remind you when you have a recurring event (e.g., birthday, anniversary) coming up that you don&rsquo;t want to forget.<\/p>"
+            }
+          },
+          "1529342210162": {
+            "type": "faq",
+            "settings": {
+              "title": "What forms of payment do you accept?",
+              "text": "<p>Currently, we accept Visa, Mastercard, Amex, Discover, Apple Pay and PayPal.<\/p>"
+            }
+          },
+          "1529342277357": {
+            "type": "faq",
+            "settings": {
+              "title": "Where can I find the nutritional information  and ingredients?",
+              "text": "<p>Nutritional information and ingredients can be found on each <a href=\"\/collections\/our-meals\" title=\"Our Meals\">menu item<\/a> and on the back of the meal sleeves on each tray.<\/p>"
+            }
+          },
+          "1529342367202": {
+            "type": "faq",
+            "settings": {
+              "title": "Can I let the recipient pick what they'd like to order and when they want it to arrive?",
+              "text": "<p>Yes!&nbsp; Just click on the <a href=\"\/products\/giftwizard-giftcard\" title=\"Gift Card\">e-gift card<\/a> when you're ordering online.&nbsp; The recipient will be able to order the meals they want, whenever they want it.&nbsp; You're also able to send a personalized video+\/or note to the recipient as soon as you place your order.&nbsp; &nbsp;Curated gifts will be included in the shipment of the meals if ordered.<\/p>"
+            }
+          },
+          "1529342414726": {
+            "type": "faq",
+            "settings": {
+              "title": "My order shows that it's been delivered, but it hasn’t been received?",
+              "text": "<p>If you can&rsquo;t locate your package, please call us at 833.SENDFNF&nbsp;and we&rsquo;ll investigate and resend your order if necessary.<\/p>"
+            }
+          },
+          "1529342449726": {
+            "type": "faq",
+            "settings": {
+              "title": "What if I’m not happy?",
+              "text": "<p>We guarantee every order 100%.&nbsp; When you&rsquo;re happy, we&rsquo;re happy.&nbsp; We always want to hear your feedback and any suggestions.&nbsp; Let us know what you think by <a href=\"\/pages\/contact-us\" title=\"Contact Us\">contacting us<\/a>.<\/p>"
+            }
+          }
+        },
+        "block_order": [
+          "module-faq-0",
+          "1541012665662",
+          "1529342169974",
+          "1529342099691",
+          "1529342178581",
+          "1529342197770",
+          "1529342403478",
+          "1529342433926",
+          "module-faq-1",
+          "module-faq-2",
+          "1529342052014",
+          "1529342073064",
+          "1529342210162",
+          "1529342277357",
+          "1529342367202",
+          "1529342414726",
+          "1529342449726"
+        ],
+        "settings": {
+          "style": "default"
+        }
+      },
+      "1541015921191": {
+        "type": "home-full-width-media",
+        "settings": {
+          "style": "default",
+          "title": "",
+          "text": "",
+          "media_layout": "image-highlight",
+          "image": "shopify:\/\/shop_images\/open-box.jpg",
+          "video_url": "",
+          "button_text": "",
+          "button_link": ""
+        }
+      },
+      "template-cart": {
+        "type": "template-cart",
+        "settings": {
+          "order_notes": false,
+          "show_shipping_calculator": false,
+          "shipping_calculator_default_country": "United States",
+          "free_gift_enabled": true,
+          "free_gift_1": "free-cookies",
+          "free_gift_2": ""
+        }
+      }
+    },
+    "content_for_index": [
+      "home-text-columns-with-icons",
+      "1541015921191",
+      "1525716368661",
+      "1526509203934"
+    ]
+  },
+  "presets": {
+    "Cool": {
+      "theme-primary-color": "#0381A2",
+      "theme-primary-color-hover": "#0288b5",
+      "theme-secondary-color": "#554d99",
+      "heading-text-color": "#000000",
+      "body-text-color": "#797676",
+      "border-color": "#e3e3e3",
+      "body-background-color": "#fff",
+      "body-font": "Roboto, sans-serif",
+      "body-font-weight": "300",
+      "heading-font": "'Open Sans', sans-serif",
+      "heading-font-weight": "300",
+      "primary-button-font": "'Open Sans', sans-serif",
+      "primary-button-font-weight": "700",
+      "sections": {
+        "home-slideshow": {
+          "type": "home-slideshow",
+          "blocks": {
+            "slide-1": {
+              "type": "slide",
+              "settings": {
+                "alignment": "center",
+                "title": "Slideshow",
+                "subtitle": "Introduce customers to your shop with lifestyle imagery and product photography."
+              }
+            },
+            "slide-2": {
+              "type": "slide",
+              "settings": {
+                "alignment": "center",
+                "title": "Slideshow",
+                "subtitle": "Introduce customers to your shop with lifestyle imagery and product photography."
+              }
+            }
+          },
+          "block_order": [
+            "slide-1",
+            "slide-2"
+          ],
+          "settings": {
+            "enable": true,
+            "layout": "full-window",
+            "transition": "transition-fade",
+            "autoplay": true
+          }
+        },
+        "home-alternating-content": {
+          "type": "home-alternating-content",
+          "blocks": {
+            "alternating-content-1": {
+              "type": "image",
+              "settings": {
+                "style": "default",
+                "button_text": "This is your call to action",
+                "button_link": "shopify:\/\/collections"
+              }
+            },
+            "alternating-content-2": {
+              "type": "video",
+              "settings": {
+                "style": "light",
+                "button_text": "This is your call to action",
+                "button_link": "shopify:\/\/collections"
+              }
+            },
+            "alternating-content-3": {
+              "type": "image",
+              "settings": {
+                "style": "default",
+                "button_text": "This is your call to action",
+                "button_link": "shopify:\/\/collections"
+              }
+            }
+          },
+          "block_order": [
+            "alternating-content-1",
+            "alternating-content-2",
+            "alternating-content-3"
+          ],
+          "settings": {}
+        },
+        "home-product-focus": {
+          "type": "home-product-focus",
+          "blocks": {
+            "home-product-focus-1": {
+              "type": "feature",
+              "settings": {
+                "icon": "ion-android-refresh"
+              }
+            },
+            "home-product-focus-2": {
+              "type": "feature",
+              "settings": {
+                "icon": "ion-android-volume-up"
+              }
+            },
+            "home-product-focus-3": {
+              "type": "feature",
+              "settings": {
+                "icon": "ion-battery-half"
+              }
+            },
+            "home-product-focus-4": {
+              "type": "feature",
+              "settings": {
+                "icon": "ion-android-microphone"
+              }
+            }
+          },
+          "block_order": [
+            "home-product-focus-1",
+            "home-product-focus-2",
+            "home-product-focus-3",
+            "home-product-focus-4"
+          ],
+          "settings": {
+            "show_product_image": true,
+            "style": "light",
+            "title": "Product focus",
+            "subtitle": "Highlight your product's finest features."
+          }
+        },
+        "home-images-with-text": {
+          "type": "home-images-with-text",
+          "blocks": {
+            "images-with-text-1": {
+              "type": "image",
+              "settings": {
+                "text": "<p>Say a bit about your brand, a specific product, or promotion.<\/p>"
+              }
+            },
+            "images-with-text-2": {
+              "type": "image",
+              "settings": {
+                "text": "<p>Display up to four images, each with their own unique heading and text.<\/p>"
+              }
+            },
+            "images-with-text-3": {
+              "type": "image",
+              "settings": {
+                "text": "<p>Offer customers a wealth of information while conserving valuable vertical space on your homepage.<\/p>"
+              }
+            }
+          },
+          "block_order": [
+            "images-with-text-1",
+            "images-with-text-2",
+            "images-with-text-3"
+          ],
+          "settings": {
+            "style": "default",
+            "alignment": "left"
+          }
+        },
+        "home-full-width-media": {
+          "type": "home-full-width-media",
+          "settings": {
+            "style": "default",
+            "title": "Full width media",
+            "text": "<p>Display a full width feature that can contain a large image, or video, and an optional call to action button.<\/p>",
+            "media_layout": "video-highlight",
+            "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc"
+          }
+        },
+        "home-text-columns-with-icons": {
+          "type": "home-text-columns-with-icons",
+          "blocks": {
+            "text-column-1": {
+              "type": "text_column",
+              "settings": {}
+            },
+            "text-column-2": {
+              "type": "text_column",
+              "settings": {}
+            },
+            "text-column-3": {
+              "type": "text_column",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "text-column-1",
+            "text-column-2",
+            "text-column-3"
+          ],
+          "settings": {
+            "style": "default",
+            "title": "Text columns with icons"
+          }
+        },
+        "home-testimonials": {
+          "type": "home-testimonials",
+          "blocks": {
+            "testimonial-1": {
+              "type": "testimonial",
+              "settings": {}
+            },
+            "testimonial-2": {
+              "type": "testimonial",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "testimonial-1",
+            "testimonial-2"
+          ],
+          "settings": {
+            "style": "default",
+            "title": "Testimonials"
+          }
+        },
+        "home-blog-posts": {
+          "type": "home-blog-posts",
+          "settings": {
+            "style": "light",
+            "posts_to_show": "3",
+            "title": "Blog posts"
+          }
+        },
+        "general-social-feeds": {
+          "type": "general-social-feeds",
+          "blocks": {
+            "widget-block-1": {
+              "type": "instagram",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "widget-block-1"
+          ],
+          "settings": {}
+        },
+        "general-footer": {
+          "type": "general-footer",
+          "settings": {
+            "style": "default",
+            "enable_borders": true
+          }
+        }
+      },
+      "content_for_index": [
+        "home-alternating-content",
+        "home-product-focus",
+        "home-images-with-text",
+        "home-full-width-media",
+        "home-text-columns-with-icons",
+        "home-testimonials",
+        "home-blog-posts"
+      ]
+    },
+    "Fresh": {
+      "theme-primary-color": "#857b58",
+      "theme-primary-color-hover": "#6f6850",
+      "theme-secondary-color": "#4e7f74",
+      "heading-text-color": "#191919",
+      "body-text-color": "#5e5e5e",
+      "border-color": "#e6e6e6",
+      "body-background-color": "#ffffff",
+      "body-font": "Roboto Condensed, sans-serif",
+      "body-font-weight": "300",
+      "heading-font": "'Playfair Display', serif",
+      "heading-font-weight": "700",
+      "primary-button-font": "Roboto, sans-serif",
+      "primary-button-font-weight": "700",
+      "sections": {
+        "home-slideshow": {
+          "type": "home-slideshow",
+          "blocks": {
+            "slide-1": {
+              "type": "slide",
+              "settings": {
+                "alignment": "center",
+                "title": "Slideshow",
+                "subtitle": "Introduce customers to your shop with lifestyle imagery and product photography."
+              }
+            },
+            "slide-2": {
+              "type": "slide",
+              "settings": {
+                "alignment": "center",
+                "title": "Slideshow",
+                "subtitle": "Introduce customers to your shop with lifestyle imagery and product photography."
+              }
+            }
+          },
+          "block_order": [
+            "slide-1",
+            "slide-2"
+          ],
+          "settings": {
+            "enable": true,
+            "layout": "full-window",
+            "transition": "transition-slide",
+            "autoplay": false
+          }
+        },
+        "home-featured-collection": {
+          "type": "home-featured-collection",
+          "settings": {
+            "style": "default",
+            "products_per_row": "3",
+            "product_rows": "2",
+            "title": "Featured collection"
+          }
+        },
+        "home-alternating-content": {
+          "type": "home-alternating-content",
+          "blocks": {
+            "alternating-content-1": {
+              "type": "image",
+              "settings": {
+                "style": "default",
+                "button_text": "This is your call to action",
+                "button_link": "shopify:\/\/collections"
+              }
+            },
+            "alternating-content-2": {
+              "type": "video",
+              "settings": {
+                "style": "light",
+                "button_text": "This is your call to action",
+                "button_link": "shopify:\/\/collections"
+              }
+            },
+            "alternating-content-3": {
+              "type": "image",
+              "settings": {
+                "style": "default",
+                "button_text": "This is your call to action",
+                "button_link": "shopify:\/\/collections"
+              }
+            }
+          },
+          "block_order": [
+            "alternating-content-1",
+            "alternating-content-2",
+            "alternating-content-3"
+          ],
+          "settings": {}
+        },
+        "home-text-columns-with-icons": {
+          "type": "home-text-columns-with-icons",
+          "blocks": {
+            "text-column-1": {
+              "type": "text_column",
+              "settings": {}
+            },
+            "text-column-2": {
+              "type": "text_column",
+              "settings": {}
+            },
+            "text-column-3": {
+              "type": "text_column",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "text-column-1",
+            "text-column-2",
+            "text-column-3"
+          ],
+          "settings": {
+            "style": "default",
+            "title": "Text columns with icons"
+          }
+        },
+        "home-full-width-media": {
+          "type": "home-full-width-media",
+          "settings": {
+            "style": "default",
+            "title": "Full width media",
+            "text": "<p>Display a full width feature that can contain a large image, or video, and an optional call to action button.<\/p>",
+            "media_layout": "video-highlight",
+            "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc"
+          }
+        },
+        "home-testimonials": {
+          "type": "home-testimonials",
+          "blocks": {
+            "testimonial-1": {
+              "type": "testimonial",
+              "settings": {}
+            },
+            "testimonial-2": {
+              "type": "testimonial",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "testimonial-1",
+            "testimonial-2"
+          ],
+          "settings": {
+            "style": "default",
+            "title": "Testimonials"
+          }
+        },
+        "home-blog-posts": {
+          "type": "home-blog-posts",
+          "settings": {
+            "style": "light",
+            "posts_to_show": "3",
+            "title": "Blog posts"
+          }
+        },
+        "general-social-feeds": {
+          "type": "general-social-feeds",
+          "blocks": {
+            "widget-block-1": {
+              "type": "twitter",
+              "settings": {
+                "style": "gradient"
+              }
+            }
+          },
+          "block_order": [
+            "widget-block-1"
+          ],
+          "settings": {}
+        },
+        "general-footer": {
+          "type": "general-footer",
+          "settings": {
+            "style": "light",
+            "enable_borders": true,
+            "show_logo": true
+          }
+        }
+      },
+      "content_for_index": [
+        "home-featured-collection",
+        "home-alternating-content",
+        "home-text-columns-with-icons",
+        "home-full-width-media",
+        "home-testimonials",
+        "home-blog-posts"
+      ]
+    },
+    "Bold": {
+      "theme-primary-color": "#ea2931",
+      "theme-primary-color-hover": "#d1282f",
+      "theme-secondary-color": "#fd8311",
+      "heading-text-color": "#161a1c",
+      "body-text-color": "#7f7f7f",
+      "border-color": "#e3e3e3",
+      "body-background-color": "#ffffff",
+      "body-font": "'Source Sans Pro', sans-serif",
+      "body-font-weight": "300",
+      "heading-font": "Montserrat, sans-serif",
+      "heading-font-weight": "400",
+      "primary-button-font": "'Source Sans Pro', sans-serif",
+      "primary-button-font-weight": "700",
+      "sections": {
+        "home-slideshow": {
+          "type": "home-slideshow",
+          "blocks": {
+            "slide-1": {
+              "type": "slide",
+              "settings": {
+                "alignment": "center",
+                "title": "Slideshow",
+                "subtitle": "Introduce customers to your shop with lifestyle imagery and product photography."
+              }
+            }
+          },
+          "block_order": [
+            "slide-1"
+          ],
+          "settings": {
+            "enable": true,
+            "layout": "full-width",
+            "transition": "transition-fade",
+            "autoplay": false
+          }
+        },
+        "home-alternating-content": {
+          "type": "home-alternating-content",
+          "blocks": {
+            "alternating-content-1": {
+              "type": "image",
+              "settings": {
+                "style": "default",
+                "button_text": "This is your call to action",
+                "button_link": "shopify:\/\/collections"
+              }
+            },
+            "alternating-content-2": {
+              "type": "video",
+              "settings": {
+                "style": "light",
+                "button_text": "This is your call to action",
+                "button_link": "shopify:\/\/collections"
+              }
+            },
+            "alternating-content-3": {
+              "type": "image",
+              "settings": {
+                "style": "default",
+                "button_text": "This is your call to action",
+                "button_link": "shopify:\/\/collections"
+              }
+            }
+          },
+          "block_order": [
+            "alternating-content-1",
+            "alternating-content-2",
+            "alternating-content-3"
+          ],
+          "settings": {}
+        },
+        "home-product-focus": {
+          "type": "home-product-focus",
+          "blocks": {
+            "home-product-focus-1": {
+              "type": "feature",
+              "settings": {
+                "icon": "ion-android-refresh"
+              }
+            },
+            "home-product-focus-2": {
+              "type": "feature",
+              "settings": {
+                "icon": "ion-android-volume-up"
+              }
+            },
+            "home-product-focus-3": {
+              "type": "feature",
+              "settings": {
+                "icon": "ion-battery-half"
+              }
+            },
+            "home-product-focus-4": {
+              "type": "feature",
+              "settings": {
+                "icon": "ion-android-microphone"
+              }
+            }
+          },
+          "block_order": [
+            "home-product-focus-1",
+            "home-product-focus-2",
+            "home-product-focus-3",
+            "home-product-focus-4"
+          ],
+          "settings": {
+            "show_product_image": true,
+            "style": "light",
+            "title": "Product focus",
+            "subtitle": "Highlight your product's finest features."
+          }
+        },
+        "home-images-with-text": {
+          "type": "home-images-with-text",
+          "blocks": {
+            "images-with-text-1": {
+              "type": "image",
+              "settings": {
+                "text": "<p>Say a bit about your brand, a specific product, or promotion.<\/p>"
+              }
+            },
+            "images-with-text-2": {
+              "type": "image",
+              "settings": {
+                "text": "<p>Display up to four images, each with their own unique heading and text.<\/p>"
+              }
+            },
+            "images-with-text-3": {
+              "type": "image",
+              "settings": {
+                "text": "<p>Offer customers a wealth of information while conserving valuable vertical space on your homepage.<\/p>"
+              }
+            }
+          },
+          "block_order": [
+            "images-with-text-1",
+            "images-with-text-2",
+            "images-with-text-3"
+          ],
+          "settings": {
+            "style": "default",
+            "alignment": "right"
+          }
+        },
+        "home-text-columns-with-icons": {
+          "type": "home-text-columns-with-icons",
+          "blocks": {
+            "text-column-1": {
+              "type": "text_column",
+              "settings": {}
+            },
+            "text-column-2": {
+              "type": "text_column",
+              "settings": {}
+            },
+            "text-column-3": {
+              "type": "text_column",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "text-column-1",
+            "text-column-2",
+            "text-column-3"
+          ],
+          "settings": {
+            "style": "light",
+            "title": "Text columns with icons"
+          }
+        },
+        "home-full-width-media": {
+          "type": "home-full-width-media",
+          "settings": {
+            "style": "default",
+            "title": "Full width media",
+            "text": "<p>Display a full width feature that can contain a large image, or video, and an optional call to action button.<\/p>",
+            "media_layout": "video-highlight",
+            "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc"
+          }
+        },
+        "home-testimonials": {
+          "type": "home-testimonials",
+          "blocks": {
+            "testimonial-1": {
+              "type": "testimonial",
+              "settings": {}
+            },
+            "testimonial-2": {
+              "type": "testimonial",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "testimonial-1",
+            "testimonial-2"
+          ],
+          "settings": {
+            "style": "default",
+            "title": "Testimonials"
+          }
+        },
+        "home-blog-posts": {
+          "type": "home-blog-posts",
+          "settings": {
+            "style": "light",
+            "posts_to_show": "2",
+            "title": "Blog posts"
+          }
+        },
+        "general-header": {
+          "type": "general-header",
+          "settings": {
+            "header_sticky": true
+          }
+        },
+        "general-social-feeds": {
+          "type": "general-social-feeds",
+          "blocks": {
+            "widget-block-1": {
+              "type": "instagram",
+              "settings": {}
+            },
+            "widget-block-2": {
+              "type": "twitter",
+              "settings": {
+                "style": "light"
+              }
+            }
+          },
+          "block_order": [
+            "widget-block-1",
+            "widget-block-2"
+          ],
+          "settings": {}
+        },
+        "general-footer": {
+          "type": "general-footer",
+          "settings": {
+            "style": "default",
+            "enable_borders": true,
+            "show_logo": true
+          }
+        }
+      },
+      "content_for_index": [
+        "home-alternating-content",
+        "home-product-focus",
+        "home-images-with-text",
+        "home-text-columns-with-icons",
+        "home-full-width-media",
+        "home-testimonials",
+        "home-blog-posts"
+      ]
+    }
+  }
+}

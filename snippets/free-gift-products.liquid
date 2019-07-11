@@ -1,0 +1,122 @@
+{% comment %}
+	Free gift #1 (the one that increases in quantity depending on the number of products the customer has in the cart) is the product titled "Free Cookies" - handle is "free-cookies".
+	Free gift #2 (the one that gets added only once if the customer has 4+ items in cart) can be the "Five Minute Journal" - handle is "journal".
+
+	Updated quantities to qualify for free gifts:
+    4-6 meals: 1 box of cookies
+    7-12 meals: 2 box of cookies
+    13-18- meals: 3 boxes of cookies
+{% endcomment %}
+
+{% comment %}
+  Replace the handles below with the handle of your add-on product.
+{% endcomment %}
+
+{% assign cookies_product = all_products[section.settings.free_gift_1] %}
+{% assign journal_product = all_products[section.settings.free_gift_2] %}
+
+{% unless cart.item_count == 0 %}
+
+  {% comment %} If the journal or cookie products exist, assign their variant ID. Otherwise, assign a 0 to avoid javascript issues. {% endcomment %}
+  {% if journal_product.empty? or journal_product.variants.first.available == false %}
+    {% assign journal_variant_id = 0 %}
+  {% else %}
+  	{% assign journal_variant_id = journal_product.variants.first.id %}
+  {% endif %}
+
+  {% if cookies_product.empty? or cookies_product.variants.first.available == false %}
+    {% assign cookies_variant_id = 0 %}
+  {% else %}
+  	{% assign cookies_variant_id = cookies_product.variants.first.id %}
+  {% endif %}
+
+  <script>
+  (function($) {
+
+    var cartItems = {{ cart.items | json }},
+        cookiesQtyInTheCart = 0,
+        journalQtyInTheCart = 0,
+        otherQtyInTheCart = 0,
+        cartUpdates = {};
+    
+    var cookiesProductEnabled = {% unless cookies_product.empty? or cookies_product.variants.first.available == false %} true {% else %} false {% endunless %};
+    var journalProductEnabled = {% unless journal_product.empty? or journal_product.variants.first.available == false %} true {% else %} false {% endunless %};
+    
+    // get the total number of cookies, journals, and other products in the cart. 
+    for (var i=0; i<cartItems.length; i++) {
+      if (cookiesProductEnabled && cartItems[i].id === {{ cookies_variant_id }}) {
+        cookiesQtyInTheCart = cartItems[i].quantity;
+      } else if (journalProductEnabled && cartItems[i].id === {{ journal_variant_id }}) {
+        journalQtyInTheCart = cartItems[i].quantity;
+      } else {
+        otherQtyInTheCart += cartItems[i].quantity;
+      }
+    }
+    
+    // remove gift products when cart is empty
+    if (otherQtyInTheCart === 0) {
+      if (cookiesProductEnabled && cookiesQtyInTheCart > 0) {
+        cartUpdates[{{ cookies_variant_id }}] = 0;
+      }
+      if (journalProductEnabled && journalQtyInTheCart > 0) {
+        cartUpdates[{{ journal_variant_id }}] = 0;
+      }
+    } else {
+      // update the cart with the proper amount of gift products
+      
+      // update the journal if the journal product is enabled
+      if (journalProductEnabled) {
+        // add journal product based on the total products in the cart
+        if (otherQtyInTheCart < 4 && journalQtyInTheCart > 0) {
+          // remove journal if there are not enough products in the cart
+          cartUpdates[{{ journal_variant_id }}] = 0;
+        }
+        else if (otherQtyInTheCart >= 4 && journalQtyInTheCart < 1) {
+          // add 1 journal product if there are 4+ items in the cart
+          cartUpdates[{{ journal_variant_id }}] = 1;
+        }
+      }
+      
+      // update the cookies if the cookies product is enabled
+      if (cookiesProductEnabled) {
+        // add cookie products based on the total products in the cart
+        if (otherQtyInTheCart < 4 && cookiesQtyInTheCart > 0) {
+          // remove cookies if there are not enough products in the cart
+          cartUpdates[{{ cookies_variant_id }}] = 0;
+        }
+        else if (otherQtyInTheCart >= 4 && otherQtyInTheCart <= 6 && cookiesQtyInTheCart !== 1) {
+          // 4-6 meals = 1 box of cookies
+          cartUpdates[{{ cookies_variant_id }}] = 1;
+        } else if (otherQtyInTheCart >= 7 && otherQtyInTheCart <= 12 && cookiesQtyInTheCart !== 2) {
+          // 7-12 meals = 2 boxes of cookies
+          cartUpdates[{{ cookies_variant_id }}] = 2;
+        } else if (otherQtyInTheCart >= 13 && cookiesQtyInTheCart !== 3) {
+          // 13+ meals = 3 boxes of cookies
+          cartUpdates[{{ cookies_variant_id }}] = 3;
+        }
+      }
+    }
+    
+    // if there are no cart updates, return without submitting the ajax request
+    if (jQuery.isEmptyObject(cartUpdates)) { 
+      return;
+    }
+    
+    // assemble the ajax request with the cart updates assembled above
+    var params = {
+      type: 'POST',
+      url: '/cart/update.js',
+      data: { updates: cartUpdates },
+      dataType: 'json',
+      success: function(stuff) { 
+        window.location.href = '/cart';
+      }
+    };
+    
+    // submit the ajax request
+    $.ajax(params);
+
+  })(jQuery);
+  </script>
+
+{% endunless %}
