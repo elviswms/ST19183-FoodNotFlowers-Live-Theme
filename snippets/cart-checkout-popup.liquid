@@ -1,0 +1,22 @@
+<div class="submit-popup-container hide">
+  <div class="popup">
+    {% if section.settings.popup_logo %}
+    	<img src="{{ section.settings.popup_logo | img_url: '300x' }}">
+    {% endif %}
+    <div class="content">
+      
+      {{ section.settings.popup_text }}
+      
+      {% comment %}
+      <p>You're almost there ... 3 important things before you check out.</p>
+      
+      <p>1.	Send a personalized note or record a 15 second video (on mobile) to go with your FOOD NOT FLOWERS gift. Look for the link in your confirmation email immediately after placing your order (check junk/spam/promotions folder).</p>
+      <p>2.  Make the moment even more special with a <a href="/collections/curated-gifts">curated gift.</a></p>
+      <p>3.  Add <a href="mailto:brandon@foodnotflowers.com">brandon@foodnotflowers.com</a> to your address book so you'll receive order status emails.</p>
+      {% endcomment %}
+    </div>
+    <div class="cta-container">
+      <input type="submit" class="button checkout-btn inverse cart-button" name="checkout" value="Checkout">
+    </div>
+  </div>
+</div>
